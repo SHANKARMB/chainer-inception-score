@@ -50,7 +50,7 @@ def main(arg_data_list='', arg_samples=-1, arg_gpu=2, arg_model='inception_score
         # print('dir_path is ..', dir_path)
 
         args_object = download.ArgsObject(downloads_dir=os.path.join(dir_path, 'downloads'),
-                                          outfile='inception_score_1.model')
+                                          outfile='inception_score.model')
         download.main(args_object)
 
     # print('loading model')
