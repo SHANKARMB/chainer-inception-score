@@ -5,14 +5,12 @@ import tarfile
 import tensorflow as tf
 from six.moves import urllib
 from chainer import serializers
-from inception_score import Inception
-
+from inception_score.inception_score_script import Inception
 
 """
 Including code from the official implementation by OpenAI found at
 https://github.com/openai/improved-gan
 """
-
 
 DATA_URL = ('http://download.tensorflow.org/models/image/imagenet/'
             'inception-2015-12-05.tgz')
@@ -335,9 +333,15 @@ def main(args):
     # TODO(hvy): Test score similarity with the original implementation
 
     print('Saving', outfile, '...')
-    serializers.save_hdf5(outfile, model)
+    serializers.save_hdf5(os.path.join(downloads_dir, outfile), model)
 
 
 if __name__ == '__main__':
     args = parse_args()
     main(args)
+
+
+class ArgsObject:
+    def __init__(self, downloads_dir='downloads', outfile='inception_score.model'):
+        self.downloads_dir = downloads_dir
+        self.outfile = outfile
